@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import { register } from "@/actions/register";
 import {
+  Box,
   Button,
   Card,
   CardContent,
@@ -12,9 +13,8 @@ import {
 import Link from "next/link";
 import { useActionState } from "react";
 
-
 function Register() {
-  const [state, action, pending] = useActionState(register,undefined)
+  const [state, action, pending] = useActionState(register, undefined);
   return (
     <Card sx={{ width: 500 }} elevation={8}>
       <form action={action}>
@@ -38,27 +38,52 @@ function Register() {
               gap={1}
             >
               <TextField
+                error={!!state?.errors.firstName}
                 fullWidth
                 size="small"
                 label="نام"
                 name="firstName"
                 variant="outlined"
+                helperText={state?.errors.firstName}
               />
               <TextField
+                error={!!state?.errors.lastName}
                 fullWidth
                 size="small"
                 label="نام خانوادگی"
                 name="lastName"
                 variant="outlined"
+                helperText={state?.errors.lastName}
               />
             </Stack>
-            <TextField size="small" label="رایانامه" name="email" type="email" variant="outlined" />
-            <TextField size="small" label="کلمه عبور" name="password" type="password" variant="outlined" />
+            <TextField
+              error={!!state?.errors.email}
+              size="small"
+              label="رایانامه"
+              name="email"
+              type="email"
+              variant="outlined"
+              helperText={state?.errors.email}
+            />
+            <TextField
+              error={!!state?.errors.password}
+              size="small"
+              label="کلمه عبور"
+              name="password"
+              type="password"
+              variant="outlined"
+              helperText={state?.errors.password?.map((e : string)=> (<Box component="span" display="block" key={e}>{e}</Box>))}
+            />
             <Typography variant="caption">
               با ثبت نام در سرویس ما شما با همه قوانین سرویس موافقت خود را اعلام
               میدارید
             </Typography>
-            <Button disabled={pending} type="submit" disableElevation variant="contained">
+            <Button
+              disabled={pending}
+              type="submit"
+              disableElevation
+              variant="contained"
+            >
               ثبت نام
             </Button>
           </Stack>
