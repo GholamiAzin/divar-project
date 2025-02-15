@@ -3,7 +3,7 @@ import { colors, createTheme } from "@mui/material";
 const theme = createTheme({
   direction: "rtl",
   typography: {
-    fontFamily: "Vazir",
+    fontFamily: "vazirmatn"
   },
   palette:{
     background:{
