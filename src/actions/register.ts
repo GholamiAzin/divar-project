@@ -1,4 +1,7 @@
+import "server-only"
 import { RegisterFormSchema, RegisterFormState } from "@/lib/validations";
+
+const BASE_URL = process.env.BASE_URL
 
 export async function register(state: RegisterFormState, formData: FormData) {
   ///validate inputs
@@ -12,7 +15,7 @@ export async function register(state: RegisterFormState, formData: FormData) {
     };
   }
   try {
-    const result = await fetch("http://localhost:8000/auth/register", {
+    const result = await fetch(`${BASE_URL}/auth/register`, {
       method: "post",
       body: JSON.stringify(validatedFields.data),
       headers: {
