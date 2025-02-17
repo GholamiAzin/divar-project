@@ -1,7 +1,8 @@
-import "server-only"
+import "server-only";
 import { RegisterFormSchema, RegisterFormState } from "@/lib/validations";
+import { createSession } from "@/lib/sessions";
 
-const BASE_URL = process.env.BASE_URL
+const BASE_URL = process.env.BASE_URL;
 
 export async function register(state: RegisterFormState, formData: FormData) {
   ///validate inputs
@@ -28,8 +29,11 @@ export async function register(state: RegisterFormState, formData: FormData) {
         message: data.message,
         errors: data.errors,
       };
-    }else{
-        
+    } else {
+      await createSession({
+        accessToken: data.tokens.accessToken,
+        refreshToken: data.tokens.refreshToken,
+      });
     }
   } catch (error) {
     console.log(error);

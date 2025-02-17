@@ -3,9 +3,7 @@ import { register } from '@/actions/register';
 import { Stack, Typography, TextField, Box, Button } from '@mui/material'
 import React, { useActionState } from 'react'
 
-type Props = {}
-
-function RegisterForm({}: Props) {
+function RegisterForm() {
   const [state, action, pending] = useActionState(register, undefined);
     
   return (
