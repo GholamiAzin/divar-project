@@ -1,6 +1,8 @@
+"use server"
 import "server-only";
 import { RegisterFormSchema, RegisterFormState } from "@/lib/validations";
 import { createSession } from "@/lib/sessions";
+import { redirect } from "next/navigation";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -34,6 +36,7 @@ export async function register(state: RegisterFormState, formData: FormData) {
         accessToken: data.tokens.accessToken,
         refreshToken: data.tokens.refreshToken,
       });
+      redirect("/dashboard");
     }
   } catch (error) {
     console.log(error);

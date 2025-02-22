@@ -1,7 +1,5 @@
 
-type Props = {}
-
-function Login({}: Props) {
+function Login() {
   return (
     <div>Login</div>
   )

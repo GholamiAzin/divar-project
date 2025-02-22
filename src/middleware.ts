@@ -16,13 +16,12 @@ export default async function middleware(req: NextRequest) {
 
   // 4. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !accessToken) {
-    return NextResponse.redirect(new URL("/login", req.nextUrl));
+    return NextResponse.redirect(new URL("/auth/login", req.nextUrl));
   }
 
   // 5. Redirect to /dashboard if the user is authenticated
   if (
     isPublicRoute &&
-    !req.nextUrl.pathname.startsWith("/dashboard") &&
     accessToken
   ) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
