@@ -14,8 +14,7 @@ export const RegisterFormSchema = z.object({
     .regex(/[0-9]/, { message: "شامل یک عدد باشد." })
     .regex(/[^a-zA-Z0-9]/, {
       message: "شامل یکی از کارکترهای خاص (! @ # $ ...) باشد.",
-    })
-    .trim(),
+    }).trim(),
 });
 
 export type RegisterFormState =
@@ -23,6 +22,21 @@ export type RegisterFormState =
       errors?: {
         firstName?: string[];
         lastName?: string[];
+        email?: string[];
+        password?: string[];
+      };
+      message?: string;
+    }
+  | undefined;
+
+export const LoginFormSchema = z.object({
+  email: z.string().email({ message: "لطفا ایمیل معتبر وارد کنید." }).trim(),
+  password: z.string(),
+});
+
+export type LoginFormState =
+  | {
+      errors?: {
         email?: string[];
         password?: string[];
       };

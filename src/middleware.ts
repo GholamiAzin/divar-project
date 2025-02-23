@@ -7,7 +7,6 @@ const protectedRoutes = "/dashboard";
 const publicRoutes = "/";
 const BASE_URL = process.env.BASE_URL;
 export default async function middleware(req: NextRequest) {
-  debugger
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname;
   const isProtectedRoute = path.startsWith(protectedRoutes);
@@ -24,7 +23,7 @@ export default async function middleware(req: NextRequest) {
     try {
       const newResult = await fetch(`${BASE_URL}/auth/refresh`, {
         method: "post",
-        body: JSON.stringify({refreshToken: refreshToken}),
+        body: JSON.stringify({ refreshToken: refreshToken }),
         headers: {
           "Content-type": "application/json",
         },
@@ -36,10 +35,10 @@ export default async function middleware(req: NextRequest) {
           refreshToken: newData.refreshToken,
         });
       }
+      return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
     } catch (error) {
       console.log(error);
     }
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
   // 4. Redirect to /login if the user is not authenticated
@@ -48,7 +47,7 @@ export default async function middleware(req: NextRequest) {
   }
 
   // 5. Redirect to /dashboard if the user is authenticated
-  if (isPublicRoute && isLogin) {
+  if (isPublicRoute && !isProtectedRoute && isLogin) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 

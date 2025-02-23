@@ -1,23 +1,24 @@
 "use server";
 import "server-only";
-import { RegisterFormSchema, RegisterFormState } from "@/lib/validations";
+import { LoginFormSchema, LoginFormState } from "@/lib/validations";
 import { createSession } from "@/lib/sessions";
 import { redirect } from "next/navigation";
 
 const BASE_URL = process.env.BASE_URL;
 
-export async function register(state: RegisterFormState, formData: FormData) {
+export async function login(state: LoginFormState, formData: FormData) {
   ///validate inputs
-  const validatedFields = RegisterFormSchema.safeParse(
+  const validatedFields = LoginFormSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
+  console.log(Object.fromEntries(formData.entries()));
   ///check errors
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
-  const result = await fetch(`${BASE_URL}/auth/register`, {
+  const result = await fetch(`${BASE_URL}/auth/login`, {
     method: "post",
     body: JSON.stringify(validatedFields.data),
     headers: {
