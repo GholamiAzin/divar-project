@@ -12,21 +12,18 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import DrawerHeader from "./drawer-header";
-import Drawer from "./drawer";
+import DrawerHeader from "./components/drawer-header";
+import Drawer from "./components/drawer";
+import { DrawerContext } from "./drawer-provider";
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+const {isOpen, handleClose} = React.useContext(DrawerContext);
 
   return (
-    <Drawer variant="permanent" open={open}>
+    <Drawer variant="permanent" open={isOpen}>
       <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton onClick={handleClose}>
           {theme.direction === "rtl" ? (
             <ChevronRightIcon />
           ) : (
@@ -44,7 +41,7 @@ export default function MiniDrawer() {
                   minHeight: 48,
                   px: 2.5,
                 },
-                open
+                isOpen
                   ? {
                       justifyContent: "initial",
                     }
@@ -59,7 +56,7 @@ export default function MiniDrawer() {
                     minWidth: 0,
                     justifyContent: "center",
                   },
-                  open
+                  isOpen
                     ? {
                         mr: 3,
                       }
@@ -73,7 +70,7 @@ export default function MiniDrawer() {
               <ListItemText
                 primary={text}
                 sx={[
-                  open
+                  isOpen
                     ? {
                         opacity: 1,
                       }
@@ -96,7 +93,7 @@ export default function MiniDrawer() {
                   minHeight: 48,
                   px: 2.5,
                 },
-                open
+                isOpen
                   ? {
                       justifyContent: "initial",
                     }
@@ -111,7 +108,7 @@ export default function MiniDrawer() {
                     minWidth: 0,
                     justifyContent: "center",
                   },
-                  open
+                  isOpen
                     ? {
                         mr: 3,
                       }
@@ -125,7 +122,7 @@ export default function MiniDrawer() {
               <ListItemText
                 primary={text}
                 sx={[
-                  open
+                  isOpen
                     ? {
                         opacity: 1,
                       }

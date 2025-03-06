@@ -1,6 +1,7 @@
-import DrawerHeader from "@/components/dashboard-layout/drawer-header";
-import DashboardHeader from "@/components/dashboard-layout/header";
-import MiniDrawer from "@/components/dashboard-layout/side-bar";
+import DrawerHeader from "@/components/dashboard-layout/components/drawer-header";
+import DashboardHeader from "@/components/dashboard-layout/dashboard-header";
+import DrawerProvider from "@/components/dashboard-layout/drawer-provider";
+import MiniDrawer from "@/components/dashboard-layout/mini-drawer";
 import { Box } from "@mui/material";
 
 const DashboradLayout = ({
@@ -10,10 +11,13 @@ const DashboradLayout = ({
 }>) => {
   return (
     <Box sx={{ display: "flex" }}>
-      <DashboardHeader />
+      <DrawerProvider>
+        <DashboardHeader />
+        <MiniDrawer />
+      </DrawerProvider>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <MiniDrawer/>
         <DrawerHeader />
+        {children}
       </Box>
     </Box>
   );

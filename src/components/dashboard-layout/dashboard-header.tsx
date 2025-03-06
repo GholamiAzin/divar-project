@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,14 +13,14 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import Search from "./search";
-import SearchIconWrapper from "./search-icon-wrapper";
-import StyledInputBase from "./styled-input-base";
-import AppBar from "./header-app-bar";
-
-
+import Search from "./components/search";
+import SearchIconWrapper from "./components/search-icon-wrapper";
+import StyledInputBase from "./components/styled-input-base";
+import AppBar from "./components/header-app-bar";
+import { DrawerContext } from "./drawer-provider";
 
 export default function DashboardHeader() {
+  const { isOpen, handleOpen } = React.useContext(DrawerContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -120,8 +120,8 @@ export default function DashboardHeader() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <>
+      <AppBar position="fixed" open={isOpen}>
         <Toolbar>
           <IconButton
             size="large"
@@ -129,6 +129,7 @@ export default function DashboardHeader() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={handleOpen}
           >
             <MenuIcon />
           </IconButton>
@@ -197,6 +198,6 @@ export default function DashboardHeader() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </Box>
+    </>
   );
 }
