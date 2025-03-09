@@ -123,16 +123,18 @@ export default function DashboardHeader() {
     <>
       <AppBar position="fixed" open={isOpen}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-            onClick={handleOpen}
-          >
-            <MenuIcon />
-          </IconButton>
+          {!isOpen && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+              onClick={handleOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography
             variant="h6"
             noWrap
