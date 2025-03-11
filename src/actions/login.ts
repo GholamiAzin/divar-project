@@ -3,8 +3,7 @@ import "server-only";
 import { LoginFormSchema, LoginFormState } from "@/lib/validations";
 import { createSession } from "@/lib/sessions";
 import { redirect } from "next/navigation";
-
-const BASE_URL = process.env.BASE_URL;
+import { BASE_URL } from "../config.server";
 
 export async function login(state: LoginFormState, formData: FormData) {
   ///validate inputs
@@ -12,6 +11,7 @@ export async function login(state: LoginFormState, formData: FormData) {
     Object.fromEntries(formData.entries())
   );
   console.log(Object.fromEntries(formData.entries()));
+  console.log("base_url\n\n\n\n\n", BASE_URL);
   ///check errors
   if (!validatedFields.success) {
     return {

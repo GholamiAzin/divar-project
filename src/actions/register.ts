@@ -3,8 +3,7 @@ import "server-only";
 import { RegisterFormSchema, RegisterFormState } from "@/lib/validations";
 import { createSession } from "@/lib/sessions";
 import { redirect } from "next/navigation";
-
-const BASE_URL = process.env.BASE_URL;
+import { BASE_URL } from "../config.server";
 
 export async function register(state: RegisterFormState, formData: FormData) {
   ///validate inputs
