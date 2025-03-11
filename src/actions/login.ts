@@ -3,7 +3,7 @@ import "server-only";
 import { LoginFormSchema, LoginFormState } from "@/lib/validations";
 import { createSession } from "@/lib/sessions";
 import { redirect } from "next/navigation";
-import { BASE_URL } from "../config.server";
+import { AUTH_BASE_URL } from "@/config.server";
 
 export async function login(state: LoginFormState, formData: FormData) {
   ///validate inputs
@@ -11,14 +11,13 @@ export async function login(state: LoginFormState, formData: FormData) {
     Object.fromEntries(formData.entries())
   );
   console.log(Object.fromEntries(formData.entries()));
-  console.log("base_url\n\n\n\n\n", BASE_URL);
   ///check errors
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
-  const result = await fetch(`${BASE_URL}/auth/login`, {
+  const result = await fetch(`${AUTH_BASE_URL}/auth/login`, {
     method: "post",
     body: JSON.stringify(validatedFields.data),
     headers: {

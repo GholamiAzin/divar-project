@@ -3,7 +3,7 @@ import "server-only";
 import { RegisterFormSchema, RegisterFormState } from "@/lib/validations";
 import { createSession } from "@/lib/sessions";
 import { redirect } from "next/navigation";
-import { BASE_URL } from "../config.server";
+import { AUTH_BASE_URL } from "@/config.server";
 
 export async function register(state: RegisterFormState, formData: FormData) {
   ///validate inputs
@@ -16,7 +16,7 @@ export async function register(state: RegisterFormState, formData: FormData) {
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
-  const result = await fetch(`${BASE_URL}/auth/register`, {
+  const result = await fetch(`${AUTH_BASE_URL}/auth/register`, {
     method: "post",
     body: JSON.stringify(validatedFields.data),
     headers: {
