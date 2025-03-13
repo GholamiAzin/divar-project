@@ -1,11 +1,11 @@
 "use client";
-import { login } from "@/actions/login";
+import { login } from "@/actions/auth/login";
 import { Stack, TextField, Box, Button } from "@mui/material";
 import React, { useActionState } from "react";
 
 function LoginForm() {
   const [state, action, pending] = useActionState(login, undefined);
-console.log("state", state)
+  console.log("state", state);
   return (
     <form action={action}>
       <Stack gap={3} marginTop={2}>

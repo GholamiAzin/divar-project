@@ -1,11 +1,11 @@
-"use client"
-import { register } from '@/actions/register';
-import { Stack, Typography, TextField, Box, Button } from '@mui/material'
-import React, { useActionState } from 'react'
+"use client";
+import { register } from "@/actions/auth/register";
+import { Stack, Typography, TextField, Box, Button } from "@mui/material";
+import React, { useActionState } from "react";
 
 function RegisterForm() {
   const [state, action, pending] = useActionState(register, undefined);
-    
+
   return (
     <form action={action}>
       <Stack gap={3}>
@@ -51,7 +51,11 @@ function RegisterForm() {
           name="password"
           type="password"
           variant="outlined"
-          helperText={state?.errors.password?.map((e : string)=> (<Box component="span" display="block" key={e}>{e}</Box>))}
+          helperText={state?.errors.password?.map((e: string) => (
+            <Box component="span" display="block" key={e}>
+              {e}
+            </Box>
+          ))}
         />
         <Typography variant="caption">
           با ثبت نام در سرویس ما شما با همه قوانین سرویس موافقت خود را اعلام
@@ -66,8 +70,8 @@ function RegisterForm() {
           ثبت نام
         </Button>
       </Stack>
-  </form>
-  )
+    </form>
+  );
 }
 
-export default RegisterForm
+export default RegisterForm;
